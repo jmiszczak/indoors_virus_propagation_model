@@ -133,6 +133,7 @@ to setup-wordl-1
       set pcolor obstacle-color
     ]
 
+    ;; middle wall
     if pycor = max-pycor / 2 [
       set pcolor obstacle-color
     ]
@@ -161,43 +162,9 @@ to setup-wordl-1
 end
 
 ;;
-;; configuration 2 - one large room, one small room
+;; configuration 2 - three rooms
 ;;
 to setup-wordl-2
-  ask patches [
-    if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
-      set pcolor obstacle-color
-    ]
-
-    if pycor = max-pycor / 4 [
-      set pcolor obstacle-color
-    ]
-
-    if pycor = max-pycor / 4 and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
-      set pcolor white
-    ]
-
-    if pcolor != obstacle-color and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
-      set pcolor gray + 4
-    ]
-
-    if pcolor != obstacle-color and pcolor != gray + 4 and pycor != max-pycor / 2 [
-      if random-float 1 < machine-allocation-prob [
-        set pcolor machine-color
-      ]
-    ]
-
-    ;; clear corridor
-    if pcolor = gray + 4 [
-      set pcolor white
-    ]
-  ]
-end
-
-;;
-;; configuration 3 - three rooms
-;;
-to setup-wordl-3
   ask patches [
     if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
       set pcolor obstacle-color
@@ -226,6 +193,40 @@ to setup-wordl-3
       set pcolor white
     ]
 
+  ]
+end
+
+;;
+;; configuration 3 - four rooms
+;;
+to setup-wordl-3
+  ask patches [
+    if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
+      set pcolor obstacle-color
+    ]
+
+    if pycor = max-pycor / 4 or pycor = 3 * max-pycor / 4 or pycor = max-pycor / 2 [
+      set pcolor obstacle-color
+    ]
+
+    if (pycor = max-pycor / 4 or pycor = 3 * max-pycor / 4 or pycor = max-pycor / 2) and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
+      set pcolor white
+    ]
+
+    if pcolor != obstacle-color and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
+      set pcolor gray + 4
+    ]
+
+    if pcolor != obstacle-color and pcolor != gray + 4 and pycor != max-pycor / 2 [
+      if random-float 1 < machine-allocation-prob [
+        set pcolor machine-color
+      ]
+    ]
+
+    ;; clear corridor
+    if pcolor = gray + 4 [
+      set pcolor white
+    ]
   ]
 end
 
@@ -394,15 +395,11 @@ to-report ratio-cont
   report count patches with [ pcolor = pink ] / count patches
 end
 
-;; mean sick time of cyrrently sick agents
-to-report mean-sick-time
-  report mean [sick-time] of turtles
+;; increase in the number of sick agents
+to-report increase-sick
+  report how-many-sick - init-infected-number
 end
 
-;;
-to-report mean-total-sick-time
-  report (mean [total-sick-time] of turtles) / (mean [total-healty-time] of turtles)
-end
 @#$#@#$#@
 GRAPHICS-WINDOW
 315
@@ -506,7 +503,7 @@ init-infected-number
 init-infected-number
 0
 100
-10.0
+1.0
 1
 1
 NIL
@@ -521,7 +518,7 @@ mobility-prob
 mobility-prob
 0
 1
-1.0
+0.05
 0.01
 1
 NIL
@@ -536,7 +533,7 @@ patch-contamination-prob
 patch-contamination-prob
 0
 1
-0.5
+0.1
 0.01
 1
 NIL
@@ -571,7 +568,7 @@ direct-infection-weight
 direct-infection-weight
 0
 1
-0.69
+0.7
 0.01
 1
 NIL
@@ -586,7 +583,7 @@ patch-infection-weight
 patch-infection-weight
 0
 1
-0.31
+0.3
 0.01
 1
 NIL
@@ -616,7 +613,7 @@ patch-heal-prob
 patch-heal-prob
 0
 1
-0.01
+0.03
 0.01
 1
 NIL
@@ -682,7 +679,7 @@ MONITOR
 852
 410
 Increase of sick
-how-many-sick - 10
+increase-sick
 2
 1
 11
@@ -1046,6 +1043,40 @@ NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiments" repetitions="30" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="480"/>
+    <metric>increase-sick</metric>
+    <steppedValueSet variable="mobility-prob" first="0.05" step="0.05" last="1"/>
+    <enumeratedValueSet variable="agent-healing-prob">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="configuration">
+      <value value="&quot;world-1&quot;"/>
+      <value value="&quot;world-2&quot;"/>
+      <value value="&quot;world-2&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="direct-infection-weight">
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.1" last="0.5"/>
+    <steppedValueSet variable="patch-heal-prob" first="0" step="0.01" last="0.05"/>
+    <enumeratedValueSet variable="init-infected-number">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="patch-infection-weight">
+      <value value="0.3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="infection-probability">
+      <value value="1"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
