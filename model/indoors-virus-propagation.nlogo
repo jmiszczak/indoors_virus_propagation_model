@@ -399,7 +399,6 @@ end
 to-report increase-sick
   report how-many-sick - init-infected-number
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 315
@@ -518,7 +517,7 @@ mobility-prob
 mobility-prob
 0
 1
-0.05
+1.0
 0.01
 1
 NIL
@@ -533,7 +532,7 @@ patch-contamination-prob
 patch-contamination-prob
 0
 1
-0.1
+0.5
 0.01
 1
 NIL
@@ -613,7 +612,7 @@ patch-heal-prob
 patch-heal-prob
 0
 1
-0.03
+0.05
 0.01
 1
 NIL
@@ -653,7 +652,7 @@ CHOOSER
 configuration
 configuration
 "world-1" "world-2" "world-3"
-0
+1
 
 PLOT
 735
@@ -1043,40 +1042,6 @@ NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
-<experiments>
-  <experiment name="experiments" repetitions="30" runMetricsEveryStep="false">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="480"/>
-    <metric>increase-sick</metric>
-    <steppedValueSet variable="mobility-prob" first="0.05" step="0.05" last="1"/>
-    <enumeratedValueSet variable="agent-healing-prob">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="configuration">
-      <value value="&quot;world-1&quot;"/>
-      <value value="&quot;world-2&quot;"/>
-      <value value="&quot;world-2&quot;"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="direct-infection-weight">
-      <value value="0.7"/>
-    </enumeratedValueSet>
-    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.1" last="0.5"/>
-    <steppedValueSet variable="patch-heal-prob" first="0" step="0.01" last="0.05"/>
-    <enumeratedValueSet variable="init-infected-number">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="population">
-      <value value="100"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="patch-infection-weight">
-      <value value="0.3"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="infection-probability">
-      <value value="1"/>
-    </enumeratedValueSet>
-  </experiment>
-</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
