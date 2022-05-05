@@ -1,5 +1,5 @@
 <experiments>
-  <experiment name="experiments" repetitions="30" runMetricsEveryStep="false">
+  <experiment name="exp1" repetitions="30" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="480"/>
