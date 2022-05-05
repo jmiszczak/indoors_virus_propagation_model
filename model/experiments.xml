@@ -16,7 +16,7 @@
     <enumeratedValueSet variable="direct-infection-weight">
       <value value="0.7"/>
     </enumeratedValueSet>
-    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.1" last="0.5"/>
+    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.1" last="0.8"/>
     <steppedValueSet variable="patch-heal-prob" first="0" step="0.01" last="0.05"/>
     <enumeratedValueSet variable="init-infected-number">
       <value value="1"/>
