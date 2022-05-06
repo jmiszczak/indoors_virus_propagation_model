@@ -4,7 +4,7 @@
     <go>go</go>
     <timeLimit steps="480"/>
     <metric>increase-sick</metric>
-    <steppedValueSet variable="mobility-prob" first="0.0" step="0.02" last="1"/>
+    <steppedValueSet variable="mobility-prob" first="0.0" step="0.025" last="1"/>
     <enumeratedValueSet variable="agent-healing-prob">
       <value value="0"/>
     </enumeratedValueSet>
@@ -16,8 +16,8 @@
     <enumeratedValueSet variable="direct-infection-weight">
       <value value="0.7"/>
     </enumeratedValueSet>
-    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="1"/>
-    <steppedValueSet variable="patch-heal-prob" first="0" step="0.02" last="1"/>
+    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.025" last="1"/>
+    <steppedValueSet variable="patch-heal-prob" first="0" step="0.025" last="1"/>
     <enumeratedValueSet variable="init-infected-number">
       <value value="1"/>
     </enumeratedValueSet>
@@ -38,7 +38,7 @@
     <go>go</go>
     <timeLimit steps="480"/>
     <metric>increase-sick</metric>
-    <steppedValueSet variable="mobility-prob" first="0.0" step="0.02" last="1"/>
+    <steppedValueSet variable="mobility-prob" first="0.0" step="0.025" last="1"/>
     <enumeratedValueSet variable="agent-healing-prob">
       <value value="0"/>
     </enumeratedValueSet>
@@ -50,8 +50,8 @@
     <enumeratedValueSet variable="direct-infection-weight">
       <value value="0.5"/>
     </enumeratedValueSet>
-    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.02" last="1"/>
-    <steppedValueSet variable="patch-heal-prob" first="0" step="0.02" last="1"/>
+    <steppedValueSet variable="patch-contamination-prob" first="0" step="0.025" last="1"/>
+    <steppedValueSet variable="patch-heal-prob" first="0" step="0.025" last="1"/>
     <enumeratedValueSet variable="init-infected-number">
       <value value="1"/>
     </enumeratedValueSet>
@@ -71,7 +71,7 @@
       <go>go</go>
       <timeLimit steps="480"/>
       <metric>increase-sick</metric>
-      <steppedValueSet variable="mobility-prob" first="0.0" step="0.02" last="1"/>
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.025" last="1"/>
       <enumeratedValueSet variable="agent-healing-prob">
         <value value="0"/>
       </enumeratedValueSet>
@@ -83,8 +83,8 @@
       <enumeratedValueSet variable="direct-infection-weight">
         <value value="0.33"/>
       </enumeratedValueSet>
-      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.02" last="1"/>
-      <steppedValueSet variable="patch-heal-prob" first="0" step="0.02" last="1"/>
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.025" last="1"/>
+      <steppedValueSet variable="patch-heal-prob" first="0" step="0.025" last="1"/>
       <enumeratedValueSet variable="init-infected-number">
         <value value="1"/>
       </enumeratedValueSet>
