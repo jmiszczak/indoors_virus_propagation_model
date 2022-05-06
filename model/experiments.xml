@@ -33,7 +33,7 @@
   </experiment>
   
   
-  <experiment name="exp2" repetitions="10" runMetricsEveryStep="false">
+  <experiment name="exp2" repetitions="50" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="480"/>
