@@ -11,7 +11,7 @@
     <enumeratedValueSet variable="configuration">
       <value value="&quot;world-1&quot;"/>
       <value value="&quot;world-2&quot;"/>
-      <value value="&quot;world-2&quot;"/>
+      <value value="&quot;world-3&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="direct-infection-weight">
       <value value="0.7"/>
