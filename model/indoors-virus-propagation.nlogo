@@ -295,15 +295,15 @@ end
 to get-infected
   get-infected-by-contamination
   get-infected-by-contact
-  ;;get-infected-by-proximity
+  get-infected-by-proximity
 end
 
 ;; get infected by contact with contaminated patch
 to get-infected-by-contamination
-;;  if contaminated? and random-float 1 < patch-infection-weight * infection-probability
- ;; [
-   ;; get-sick
- ;; ]
+  if contaminated? and random-float 1 < patch-infection-weight * infection-probability
+  [
+    get-sick
+  ]
 end
 
 ;; get infected by a direct contact with another agent
