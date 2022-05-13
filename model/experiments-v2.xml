@@ -1,0 +1,52 @@
+<experiments>
+
+    <!-- exp6: with patch contamination and parameter values from KD -->
+    <experiment name="exp6" repetitions="100" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <timeLimit steps="480"/>
+      <metric>increase-sick</metric>
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.05" last="1"/>
+      <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="configuration">
+        <value value="&quot;world-1&quot;"/>
+        <value value="&quot;world-2&quot;"/>
+        <value value="&quot;world-3&quot;"/>
+      </enumeratedValueSet>
+ 
+ 
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="1"/>
+
+      <enumeratedValueSet variable="patch-heal-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
+      
+      <enumeratedValueSet variable="population">
+        <value value="100"/>
+      </enumeratedValueSet>
+      
+      <!-- values based on the KD's estimations -->
+      <enumeratedValueSet variable="direct-infection-weight">
+        <value value="0.01"/>
+      </enumeratedValueSet>
+      
+      <enumeratedValueSet variable="indirect-infection-weight">
+        <value value="0.0027"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-infection-weight">
+        <value value="0.0001"/>
+      </enumeratedValueSet>
+
+      <!-- scaling parameter - not used -->
+      <enumeratedValueSet variable="infection-probability">
+        <value value="1"/>
+      </enumeratedValueSet>
+    </experiment> 
+
+
+</experiments>
