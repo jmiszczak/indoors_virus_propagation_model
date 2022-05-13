@@ -26,13 +26,13 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = 'exp2'
+exp_desc = 'exp1'
 
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
 
-data = pd.read_csv(exp_desc + '.csv', header=6) 
-data = data[data['configuration'] == confs[2]]
+data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
+data = data[data['configuration'] == confs[1]]
 
 #%% column names
 
@@ -58,13 +58,14 @@ c = [
 # 4th variable is visualized
 v = ['mobility-prob','patch-contamination-prob', 'patch-heal-prob', 'increase-sick']
 # vl = ['pc', r'$p_\lambda$', 'mobility']
-vl = ['$\mu$', 'p-c-p', 'p-heal-p', 'increase-sick']
+vl = ['$\mu$', 'patch contamination probability', 'patch healing probability', 'increase-sick']
 
 # selection for plotting
 
 # selected values of the 1st variable
 # var0s = [0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
-var0s = [_/10 for _ in range(9)]
+var0s = [_/10 for _ in range(2,11)]
+var0s = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 1]
 
 # all vaues for 2nd dna 3rd variable
 var1s = data[v[1]].unique()
@@ -82,13 +83,13 @@ for v0 in var0s:
                 v0,
                 v1,
                 v2,
-                data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick'].mean()
+                data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick'].std()
             ]
 
 #%%
 
 fig = mpl.figure.Figure(figsize=(6,5.5))
-levels = np.linspace(0,5,5)
+levels = np.linspace(0,10,5)
 
 for i,v0 in enumerate(var0s):
     axs = fig.add_subplot(331+i);
@@ -107,12 +108,12 @@ for i,v0 in enumerate(var0s):
         plot_data.T[1].reshape(len(var1s), len(var2s)), 
         plot_data.T[2].reshape(len(var1s), len(var2s)),
         levels = levels,
-        cmap = 'Oranges',
+        cmap = 'Reds',
         norm=colors.Normalize(vmin=0, vmax=max(levels)),        
     )
     
-    axs.set_title('abcdefghi'[i]+') '+vl[0]+'='+str(v0))
-    axs.set_xticks(var1s[::2])
+    axs.set_title(chr(97+i) +') '+vl[0]+'='+str(v0))
+    axs.set_xticks(var1s[::4])
     
     axs.grid(True,linestyle=':', linewidth=0.5, c='k')
     

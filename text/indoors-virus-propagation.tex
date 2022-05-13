@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \usepackage{fullpage}
 
-\title{Verification of indoors virus propagation model using agent-based model}
+\title{Agent-based indoors virus propagation model}
 \author{Jarosław Miszczak}
 
 \begin{document}
@@ -22,11 +22,20 @@
 \section{Agent-based model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{figure}[ht!]
+\includegraphics[width=\textwidth]{plots/model-gui.png}
+\caption{User interface for the NetLogo model of indoors virus propagation with generated configuration.}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simulation results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{figure}[ht!]
+\includegraphics{plots/plot_exp5.pdf}
+\caption{Increase in the number of infected agents for different values of mobility parameter $\mu$. Each plot represents the absolute increase of the number of infected agents in the population of 100 agents with different number of initially infected agents and with different values of probability of getting infected via contaminated items. The results were obtained by running \texttt{exp4} from \texttt{experiments.xml}.}
+\end{figure}
 
 
 

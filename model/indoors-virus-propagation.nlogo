@@ -401,9 +401,9 @@ to-report increase-sick
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-315
+290
 10
-638
+613
 634
 -1
 -1
@@ -655,10 +655,10 @@ configuration
 1
 
 PLOT
-735
-50
-1130
-340
+640
+15
+1035
+305
 virus spread
 time
 number of infected
@@ -673,10 +673,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot how-many-sick"
 
 MONITOR
-735
-365
-852
-410
+640
+330
+757
+375
 Increase of sick
 increase-sick
 2
