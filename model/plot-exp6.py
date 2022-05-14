@@ -26,31 +26,31 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = 'exp5'
+exp_desc = 'exp6'
 
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
 
 data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
-data = data[data['configuration'] == confs[1]]
+data = data[data['configuration'] == confs[0]]
 
 #%% column names
 
 c = [
-     '[run number]',
-     'mobility-prob',
-     'agent-healing-prob',
-     'configuration',
-     'direct-infection-weight',
-     'patch-contamination-prob',
-     'patch-heal-prob',
-     'init-infected-number',
-     'population',
-     'patch-infection-weight',
-     'infection-probability',
-     '[step]',
-     'increase-sick'
-     ]
+  "[run number]",
+  "mobility-prob",
+  "agent-healing-prob",
+  "configuration",
+  "direct-infection-weight",
+  "patch-contamination-prob",
+  "patch-heal-prob",
+  "init-infected-number",
+  "population",
+  "patch-infection-weight",
+  "infection-probability",
+  "[step]",
+  "increase-sick"
+  ]
 
 # variables
 # 1st is different for each plot
@@ -90,7 +90,7 @@ for v0 in var0s:
 
 fig = mpl.figure.Figure(figsize=(6,5.5))
 levels = np.linspace(0,11)
-levels = range(1,32,3)
+levels = range(1,14,2)
 
 for i,v0 in enumerate(var0s):
     axs = fig.add_subplot(331+i);
