@@ -83,14 +83,14 @@ for v0 in var0s:
                 v0,
                 v1,
                 v2,
-                data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick'].mean()
+                data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick'].max()
             ]
 
 #%%
 
 fig = mpl.figure.Figure(figsize=(6,5.5))
 levels = np.linspace(0,11)
-levels = range(1,14,2)
+levels = range(1,26,4)
 
 for i,v0 in enumerate(var0s):
     axs = fig.add_subplot(331+i);
@@ -101,6 +101,8 @@ for i,v0 in enumerate(var0s):
         plot_data.T[1].reshape(len(var1s), len(var2s)), 
         plot_data.T[2].reshape(len(var1s), len(var2s)),
         levels = levels,
+        antialiased = True,
+        linewidths = 0.5,
         colors = 'k',linestyles='dotted'
     )
     
@@ -110,11 +112,11 @@ for i,v0 in enumerate(var0s):
         plot_data.T[2].reshape(len(var1s), len(var2s)),
         levels = levels,
         cmap = 'inferno_r',
-        norm=colors.Normalize(vmin=0, vmax=max(levels)),        
+        norm=colors.Normalize(vmin=min(levels), vmax=max(levels)),        
     )
     
     axs.set_title(chr(97+i) +') '+vl[0]+'='+str(v0))
-    axs.set_xticks(var1s[::4])
+    axs.set_xticks(var1s[::2])
     
     axs.grid(True,linestyle=':', linewidth=0.5, c='k')
     
