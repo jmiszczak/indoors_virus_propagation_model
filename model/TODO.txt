@@ -1,0 +1,3 @@
+- zrobić symulacje dla minjszego s 
+- zrobić dla duzego i malego s z polulacja 50
+- zrobić histogram liczby nowych zakarzen dla kilku przypadkow

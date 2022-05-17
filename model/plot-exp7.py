@@ -26,20 +26,19 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = 'exp6'
+exp_desc = 'exp7'
 
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
 
-
-
 popul = 100
-conf = 1
+conf = 2
 
 exp_desc_extr = f'_pop{popul}_{confs[conf]}'
 
 data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
 data = data[data['configuration'] == confs[conf]]
+data = data[data['population'] == popul]
 
 #%% column names
 
@@ -146,5 +145,5 @@ cbar.set_ticklabels([str(l) for l in levels])
 
 fig.tight_layout()
 
-fig.savefig("plots/plot_"+ exp_desc + exp_desc_extr +".pdf", format="pdf", bbox_inches = 'tight')
+fig.savefig("plots/plot_"+ exp_desc + exp_desc_extr + ".pdf", format="pdf", bbox_inches = 'tight')
 display(fig)
