@@ -25,6 +25,7 @@
 \begin{figure}[ht!]
 \includegraphics[width=\textwidth]{plots/model-gui.png}
 \caption{User interface for the NetLogo model of indoors virus propagation with generated configuration.}
+\label{fig:gui-world-3}
 \end{figure}
 
 
@@ -33,14 +34,51 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[ht!]
-\includegraphics{plots/plot_exp6-full.pdf}
-\caption{Mean increase in the number of infected agents for different values of mobility parameter $\mu$. Each plot represents the absolute increase of the number of infected agents in the population of 100 agents with different number of initially infected agents, ranging from $1$ to $10$,  and with different values of probability contaminating the items. The results were obtained by running \texttt{exp6} from \texttt{experiments-v2.xml}.}
+\includegraphics{plots/sick_increase_large_s_pop100.pdf}
+\caption{Mean increase in the number of infected agents for different values of mobility parameter $\mu$. Each plot represents the absolute increase of the number of infected agents in the population of 100 agents with different number of initially infected agents, ranging from $1$ to $10$,  and with different values of probability contaminating the items.}
+\label{fig:sick_increase_large_s_pop100}
 \end{figure}
+
 
 \begin{figure}[ht!]
-\includegraphics{plots/plot_exp6-part.pdf}
-\caption{Zoomed versions of the previous plots.}
+\includegraphics{plots/sick_increase_large_s_pop50.pdf}
+\caption{Mean increase in the number of infected agents for different values of mobility parameter $\mu$ for the population of 50 agents. Other parameters are described in caption of Fig.~\ref{fig:sick_increase_large_s_pop100} and the colour scale is the same. One should note that even for the significant portion of the infected agents in the population, the spread of the disease is limited.}
+\label{fig:sick_increase_large_s_pop50}
 \end{figure}
 
+
+
+\begin{figure}[ht!]
+\includegraphics{plots/sick_increase_small_s_pop100_world-3.pdf}
+\caption{Mean increase in the number of infected agents for different values of mobility parameter $\mu$ with the contamination parameters for the population without coughing agents. The population of agents was set to 100 and configuration of obstacles from Fig~\ref{fig:gui-world-3}. The colour scale is the same as in the Figs~\ref{fig:sick_increase_large_s_pop100} and \ref{fig:sick_increase_large_s_pop50}. One should note that even for the significant portion of the infected agents in the population, the spread of the disease is limited.}
+\label{fig:sick_increase_small_s_pop100_world-3}
+\end{figure}
+
+
+
+
+
+
+\appendix
+
+\section{Simulation parameters}
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Figure} & \textbf{Experiment} \\
+\hline
+Fig~\ref{fig:sick_increase_large_s_pop100} & exp6  (population 100, world-1)\\
+\hline
+Fig~\ref{fig:sick_increase_large_s_pop50} & exp6a (population 50, world-1)\\ 
+\hline
+Fig~\ref{fig:sick_increase_small_s_pop100_world-3} & exp7 (population 100, world-3)  \\
+\hline
+ &  \\
+\hline
+\end{tabular}
+\caption{Names of the experiments from \texttt{experiements-v2.xml} file for the figures included in the report.}
+\end{table}
 
 \end{document}

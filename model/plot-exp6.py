@@ -31,8 +31,15 @@ exp_desc = 'exp6'
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
 
+
+
+popul = 100
+conf = 1
+
+exp_desc_extr = f'_pop{popul}_{confs[conf]}'
+
 data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
-data = data[data['configuration'] == confs[0]]
+data = data[data['configuration'] == confs[conf]]
 
 #%% column names
 
@@ -83,14 +90,14 @@ for v0 in var0s:
                 v0,
                 v1,
                 v2,
-                data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick'].max()
+                data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick'].mean()
             ]
 
 #%%
 
 fig = mpl.figure.Figure(figsize=(6,5.5))
-levels = np.linspace(0,11)
-levels = range(1,26,4)
+# levels = np.linspace(0,11)
+levels = range(1,14,2)
 
 for i,v0 in enumerate(var0s):
     axs = fig.add_subplot(331+i);
@@ -117,6 +124,7 @@ for i,v0 in enumerate(var0s):
     
     axs.set_title(chr(97+i) +') '+vl[0]+'='+str(v0))
     axs.set_xticks(var1s[::2])
+    # axs.set_xlim(0,1)
     
     axs.grid(True,linestyle=':', linewidth=0.5, c='k')
     

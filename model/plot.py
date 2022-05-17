@@ -33,6 +33,7 @@ confs = ['world-1', 'world-2', 'world-3']
 
 data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
 data = data[data['configuration'] == confs[1]]
+data = data[data['population'] == 100]
 
 #%% column names
 
