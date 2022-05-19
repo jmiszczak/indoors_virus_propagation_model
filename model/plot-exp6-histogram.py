@@ -26,18 +26,19 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = 'exp6a'
+exp_desc = 'exp7'
 
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
 
 popul = 100
-conf = 1
+conf = 0
 
 exp_desc_extr = f'_pop{popul}_{confs[conf]}_hist'
 
 data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
 data = data[data['configuration'] == confs[conf]]
+data = data[data['population'] == popul]
 
 #%% column names
 
@@ -61,29 +62,30 @@ c = [
 # 1st is different for each plot
 # 2nd and 3rd vars provide axes for plots
 # 4th variable is visualized
-v = ['mobility-prob','patch-contamination-prob', 'init-infected-number', 'increase-sick']
+v = ['mobility-prob', 'init-infected-number','patch-contamination-prob', 'increase-sick']
 # vl = ['pc', r'$p_\lambda$', 'mobility']
-vl = ['$\mu$', 'patch contamination probability', 'initially infected agents', 'increase-sick']
+vl = [ '$\mu$','initially infected agents', 'patch contamination probability',  'increase-sick']
 
 # selection for plotting
 
 # selected values of the 1st variable
 # var0s = [0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
-var0s = [_/10 for _ in range(2,11)]
-var0s = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 1]
+var0s = [0.1,0.2,0.5,1]
+# var0s = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 1]
 
 # all vaues for 2nd dna 3rd variable
-var1s = data[v[1]].unique()
-var2s = data[v[2]].unique()
-
+# var1s = data[v[1]].unique()
+# var2s = data[v[2]].unique()
+var1s =  [_ for _ in [1,2,5,10]]
+var2s = [0.5] # only one case
 
 #%% 
 # calculate mean for the presented variable
 df = pd.DataFrame(columns=v)
 
 for v0 in var0s:
-  for v1 in [0.5]:
-    for v2 in [4]:
+  for v1 in var1s:
+    for v2 in var2s:
       df.loc[len(df.index)] = [
         v0,
         v1,
@@ -93,17 +95,39 @@ for v0 in var0s:
 
 #%%
 
-fig = mpl.figure.Figure(figsize=(6,5.5))
+fig = mpl.figure.Figure(figsize=(6,6))
 # levels = np.linspace(0,11)
 # levels = range(1,14,2)
 
 
 for i,v0 in enumerate(var0s):
-  axs = fig.add_subplot(331+i)
-  plot_data = df[df[v[0]] == v0]
-  
-  plot_data = data[ (data['mobility-prob'] == v0) & (data['init-infected-number'] == 1) & (data['patch-contamination-prob'] == 0.5) ]['increase-sick'].to_numpy()
-  axs.hist(plot_data,bins=10, density=True, histtype= 'step' )
+  for j,v1 in enumerate(var1s):
+    # print(i,j)
+    axs = fig.add_subplot(4,4,i+1+4*j)
+    plot_data = df[df[v[0]] == v0]
+    
+    plot_data = data[ (data['mobility-prob'] == v0) & (data['init-infected-number'] == v1) & (data['patch-contamination-prob'] == 0.5) ]['increase-sick'].to_numpy()
+    axs.hist(plot_data,bins=10, density=False, histtype= 'step', color="navy")
+    axs.set_xlim(0,30)
+    axs.set_ylim(0,40)
+ 
+   
+    axs.text(14,32,f"$\mu={v0}$")
+    
+    if i==0:
+      axs.set_title(f"{v1} initialy infected")
+    
+    axs.grid(True,linestyle=':', linewidth=0.25, c='k')
+    
+    if i not in [0]:
+      axs.set_yticklabels([])
+    
+    if j not in [3]:
+      axs.set_xticklabels([])
+      
+    axs.set_xticks([6*_ for _ in range(6)])
+    axs.set_yticks([10*_ for _ in range(5)])
+
 
 
 # for i,v0 in enumerate(var0s):
@@ -153,5 +177,7 @@ for i,v0 in enumerate(var0s):
 
 fig.tight_layout()
 
-fig.savefig("plots/plot_"+ exp_desc + exp_desc_extr +".pdf", format="pdf", bbox_inches = 'tight')
+plotFileName = "plots/plot_"+ exp_desc + exp_desc_extr +".pdf"
+print("[INFO] Saving: " + plotFileName)
+fig.savefig(plotFileName, format="pdf", bbox_inches = 'tight')
 display(fig)

@@ -14,7 +14,7 @@
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
+%\section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -24,7 +24,7 @@
 
 \begin{figure}[ht!]
 \includegraphics[width=\textwidth]{plots/model-gui.png}
-\caption{User interface for the NetLogo model of indoors virus propagation with generated configuration.}
+\caption{User interface for the NetLogo model of indoors virus propagation with generated configuration. The presented configuration include four modules. Blue patches represent workplaces, and the agents located in their vicinity have decreased mobility. Black patches represent walls.}
 \label{fig:gui-world-3}
 \end{figure}
 
@@ -32,6 +32,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simulation results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Figure} & \textbf{Experiment} \\
+\hline
+Fig~\ref{fig:sick_increase_large_s_pop100} & exp6  (population 100, world-1)\\
+\hline
+Fig~\ref{fig:sick_increase_large_s_pop50} & exp6a (population 50, world-1)\\ 
+\hline
+Fig~\ref{fig:sick_increase_small_s_pop100_world-3} & exp7 (population 100, world-3)  \\
+\hline
+ &  \\
+\hline
+\end{tabular}
+\caption{Names of the experiments from \texttt{experiements-v2.xml} file for the figures included in the report.}
+\end{table}
+
 
 \begin{figure}[ht!]
 \includegraphics{plots/sick_increase_large_s_pop100.pdf}
@@ -55,30 +74,24 @@
 \end{figure}
 
 
+\begin{figure}[ht!]
+\includegraphics{plots/plot_exp6_pop100_world-1_hist.pdf}
+\caption{Dependency between the number of initially infected agents and the mobility. Each row represents series of histograms for a fixed number of initially infected agents (equal to 1, 2, 5 and 10) for changing mobility. One can observe that for the case when a significant potion og the population is initially infected the changes in the mobility have less prominent impact on the distribution the in the case of small number of initially infected agents. Presented data were generated for \texttt{exp6} from  \texttt{experiements-v2.xml}.}
+\label{fig:exp6_pop100_world-1_hist}
+\end{figure}
 
 
+\begin{figure}[ht!]
+\includegraphics{plots/plot_exp7_pop100_world-1_hist.pdf}
+\caption{Dependency between the number of initially infected agents and the mobility for the case $s=5$ (\texttt{exp7} from  \texttt{experiements-v2.xml}). \textbf{Note} This could be presented in the same plot with plotds in Fig.~\ref{fig:exp6_pop100_world-1_hist}.}
+\label{fig:exp7_pop100_world-1_hist}
+\end{figure}
 
+
+\newpage
 
 \appendix
 
-\section{Simulation parameters}
 
-\begin{table}
-\centering
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Figure} & \textbf{Experiment} \\
-\hline
-Fig~\ref{fig:sick_increase_large_s_pop100} & exp6  (population 100, world-1)\\
-\hline
-Fig~\ref{fig:sick_increase_large_s_pop50} & exp6a (population 50, world-1)\\ 
-\hline
-Fig~\ref{fig:sick_increase_small_s_pop100_world-3} & exp7 (population 100, world-3)  \\
-\hline
- &  \\
-\hline
-\end{tabular}
-\caption{Names of the experiments from \texttt{experiements-v2.xml} file for the figures included in the report.}
-\end{table}
 
 \end{document}
