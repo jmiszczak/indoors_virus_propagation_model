@@ -26,7 +26,9 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = 'exp7'
+exp_desc = []
+exp_desc.append('exp6')
+exp_desc.append('exp7')
 
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
@@ -34,11 +36,14 @@ confs = ['world-1', 'world-2', 'world-3']
 popul = 100
 conf = 0
 
-exp_desc_extr = f'_pop{popul}_{confs[conf]}_hist'
+exp_desc_extr = f'pop{popul}_{confs[conf]}_' + "_".join(exp_desc) +'_hist'
 
-data = pd.read_csv('data/' + exp_desc + '.csv', header=6) 
-data = data[data['configuration'] == confs[conf]]
-data = data[data['population'] == popul]
+data = []
+
+for i,e in enumerate(exp_desc):
+  data.append( pd.read_csv('data/' + e + '.csv', header=6))
+  data[i] = data[i][data[i]['configuration'] == confs[conf]]
+  data[i] = data[i][data[i]['population'] == popul]
 
 #%% column names
 
@@ -81,35 +86,42 @@ var2s = [0.5] # only one case
 
 #%% 
 # calculate mean for the presented variable
-df = pd.DataFrame(columns=v)
+df = []
 
-for v0 in var0s:
-  for v1 in var1s:
-    for v2 in var2s:
-      df.loc[len(df.index)] = [
-        v0,
-        v1,
-        v2,
-        data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick']
-      ]
+for i,e in enumerate(exp_desc):
+  df.append(pd.DataFrame(columns=v))
+
+  for v0 in var0s:
+    for v1 in var1s:
+      for v2 in var2s:
+        df[i].loc[len(df[i].index)] = [
+          v0,
+          v1,
+          v2,
+          data[i][ (data[i][v[0]] == v0) & (data[i][v[1]] == v1) & (data[i][v[2]] == v2) ] ['increase-sick']
+        ]
 
 #%%
 
 fig = mpl.figure.Figure(figsize=(6,6))
 # levels = np.linspace(0,11)
 # levels = range(1,14,2)
-
-
+colors = ["red","navy"]
+line_styles = ['solid','dashed']
+plot_data = []
 for i,v0 in enumerate(var0s):
   for j,v1 in enumerate(var1s):
     # print(i,j)
-    axs = fig.add_subplot(4,4,i+1+4*j)
-    plot_data = df[df[v[0]] == v0]
     
-    plot_data = data[ (data['mobility-prob'] == v0) & (data['init-infected-number'] == v1) & (data['patch-contamination-prob'] == 0.5) ]['increase-sick'].to_numpy()
-    axs.hist(plot_data,bins=10, density=False, histtype= 'step', color="navy")
+    axs = fig.add_subplot(4,4,i+1+4*j)
+    for k,e in enumerate(exp_desc):
+      plot_data.append(df[k][df[k][v[0]] == v0])
+    
+      plot_data[k] = data[k][ (data[k]['mobility-prob'] == v0) & (data[k]['init-infected-number'] == v1) & (data[k]['patch-contamination-prob'] == 0.5) ]['increase-sick'].to_numpy()
+      axs.hist(plot_data[k], bins=8, density=False, histtype = 'step', color=colors[k], linestyle=line_styles[k])
+    
     axs.set_xlim(0,30)
-    axs.set_ylim(0,40)
+    axs.set_ylim(0,60)
  
    
     axs.text(14,32,f"$\mu={v0}$")
@@ -126,58 +138,12 @@ for i,v0 in enumerate(var0s):
       axs.set_xticklabels([])
       
     axs.set_xticks([6*_ for _ in range(6)])
-    axs.set_yticks([10*_ for _ in range(5)])
-
-
-
-# for i,v0 in enumerate(var0s):
-#   axs = fig.add_subplot(331+i);
-#   plot_data = df[df[v[0]] == v0][[v[1], v[2], v[3]]].to_numpy()
-
-#   axs.contour(
-#     plot_data.T[0].reshape(len(var1s), len(var2s)), 
-#     plot_data.T[1].reshape(len(var1s), len(var2s)), 
-#     plot_data.T[2].reshape(len(var1s), len(var2s)),
-#     levels = levels,
-#     antialiased = True,
-#     linewidths = 0.5,
-#     colors = 'k',linestyles='dotted'
-#   )
-  
-#   im=axs.contourf(
-#     plot_data.T[0].reshape(len(var1s), len(var2s)), 
-#     plot_data.T[1].reshape(len(var1s), len(var2s)), 
-#     plot_data.T[2].reshape(len(var1s), len(var2s)),
-#     levels = levels,
-#     cmap = 'inferno_r',
-#     norm=colors.Normalize(vmin=min(levels), vmax=max(levels)),    
-#   )
-  
-#   axs.set_title(chr(97+i) +') '+vl[0]+'='+str(v0))
-#   axs.set_xticks(var1s[::2])
-#   # axs.set_xlim(0,1)
-  
-#   axs.grid(True,linestyle=':', linewidth=0.5, c='k')
-  
-#   if i not in [6,7,8]:
-#     axs.set_xticklabels([])
-   
-#   if i not in [0,3,6]:
-#     axs.set_yticklabels([])
-    
-#   if i==7:
-#     axs.set_xlabel(vl[1])
-#   if i==3:
-#     axs.set_ylabel(vl[2])
-    
-
-# cbar_ax = fig.add_axes([0.125, 1.02, 0.8, 0.02])
-# cbar = fig.colorbar(im, cax=cbar_ax, orientation="horizontal")
-# cbar.set_ticklabels([str(l) for l in levels])
+    axs.set_yticks([10*_ for _ in range(7)])
+ 
 
 fig.tight_layout()
 
-plotFileName = "plots/plot_"+ exp_desc + exp_desc_extr +".pdf"
+plotFileName = "plots/plot_"+ exp_desc_extr +".pdf"
 print("[INFO] Saving: " + plotFileName)
 fig.savefig(plotFileName, format="pdf", bbox_inches = 'tight')
 display(fig)
