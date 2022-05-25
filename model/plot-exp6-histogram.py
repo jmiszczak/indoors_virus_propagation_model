@@ -124,7 +124,7 @@ for i,v0 in enumerate(var0s):
     axs.set_ylim(0,60)
  
    
-    axs.text(14,32,f"$\mu={v0}$")
+    axs.text(18,44,f"$\mu={v0}$")
     
     if i==1:
       axs.set_title(f"{v1} initialy infected")
@@ -134,7 +134,7 @@ for i,v0 in enumerate(var0s):
     if i not in [0]:
       axs.set_yticklabels([])
     
-    if j not in [3]:
+    if j not in [2]:
       axs.set_xticklabels([])
       
       

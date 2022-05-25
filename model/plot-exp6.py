@@ -34,7 +34,7 @@ confs = ['world-1', 'world-2', 'world-3']
 
 
 popul = 100
-conf = 1
+conf = 2
 
 exp_desc_extr = f'_pop{popul}_{confs[conf]}'
 
@@ -141,10 +141,15 @@ for i,v0 in enumerate(var0s):
         
 
 cbar_ax = fig.add_axes([0.125, 1.02, 0.8, 0.02])
-cbar = fig.colorbar(im, cax=cbar_ax, orientation="horizontal")
+cbar = fig.colorbar(im, cax=cbar_ax, orientation="horizontal",label='number of new infections')
+cbar.ax.xaxis.set_ticks_position('bottom')
+cbar.ax.xaxis.set_label_position('top')
 cbar.set_ticklabels([str(l) for l in levels])
 
 fig.tight_layout()
 
-fig.savefig("plots/plot_"+ exp_desc + exp_desc_extr +".pdf", format="pdf", bbox_inches = 'tight')
+plotFileName = "plots/plot_"+ exp_desc + exp_desc_extr +".pdf"
+print("[INFO] Saving: " + plotFileName)
+
+fig.savefig(plotFileName, format="pdf", bbox_inches = 'tight')
 display(fig)
