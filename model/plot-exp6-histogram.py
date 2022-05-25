@@ -75,13 +75,13 @@ vl = [ '$\mu$','initially infected agents', 'patch contamination probability',  
 
 # selected values of the 1st variable
 # var0s = [0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
-var0s = [0.1,0.2,0.5,1]
+var0s = [0.1,0.5,1]
 # var0s = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 1]
 
 # all vaues for 2nd dna 3rd variable
 # var1s = data[v[1]].unique()
 # var2s = data[v[2]].unique()
-var1s =  [_ for _ in [1,2,5,10]]
+var1s =  [_ for _ in [1,5,10]]
 var2s = [0.5] # only one case
 
 #%% 
@@ -113,7 +113,7 @@ for i,v0 in enumerate(var0s):
   for j,v1 in enumerate(var1s):
     # print(i,j)
     
-    axs = fig.add_subplot(4,4,i+1+4*j)
+    axs = fig.add_subplot(3,3,i+1+3*j)
     for k,e in enumerate(exp_desc):
       plot_data.append(df[k][df[k][v[0]] == v0])
     
@@ -126,7 +126,7 @@ for i,v0 in enumerate(var0s):
    
     axs.text(14,32,f"$\mu={v0}$")
     
-    if i==0:
+    if i==1:
       axs.set_title(f"{v1} initialy infected")
     
     axs.grid(True,linestyle=':', linewidth=0.25, c='k')
@@ -136,6 +136,12 @@ for i,v0 in enumerate(var0s):
     
     if j not in [3]:
       axs.set_xticklabels([])
+      
+      
+    if i==1 and j==2:
+        axs.set_xlabel("number of new infections")
+    if j==1 and i==0:
+        axs.set_ylabel("number of occurences")
       
     axs.set_xticks([6*_ for _ in range(6)])
     axs.set_yticks([10*_ for _ in range(7)])
