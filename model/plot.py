@@ -138,3 +138,5 @@ fig.tight_layout()
 
 fig.savefig("plots/plot_"+ exp_desc +".pdf", format="pdf", bbox_inches = 'tight')
 display(fig)
+
+#%%
