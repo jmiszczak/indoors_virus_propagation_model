@@ -156,7 +156,7 @@
     </experiment> 
 
     <!-- exp8: with patch contamination and parameter values from KD, s=5 -->
-    <!-- resulting plot: sick_increase_v2_pop100_world-3.pdf -->
+    <!-- resulting plot: plot_exp8_pop100_world-3.pdf (was: sick_increase_large_s_pop100.pdf) -->
     <experiment name="exp8" repetitions="100" runMetricsEveryStep="false">
       <setup>setup</setup>
       <go>go</go>
@@ -209,7 +209,7 @@
 
 
     <!-- exp9: with patch contamination and parameter values from KD, s=5 -->
-    <!-- resulting plot: sick_increase_v3_pop100_world-3.pdf -->
+    <!-- resulting plot: plot_exp9_pop100_world-3.pdf (was: sick_increase_large_s_pop50.pdf) -->
     <experiment name="exp9" repetitions="100" runMetricsEveryStep="false">
       <setup>setup</setup>
       <go>go</go>
