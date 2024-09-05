@@ -40,20 +40,24 @@ to setup
   ;;
   ;; some variables without the controls in the UI
   ;;
+  set time-interval 900 ;; 1/4 hour
   set init-contamination-ratio 0
   set machine-allocation-prob 0.1
+
+  ;;
+  ;; visualization parameters
+  ;;
   set obstacle-color black
   set machine-color blue
   set contaminated-patch-color pink
-  set time-interval 900 ;; 1/4 hour
+
   ;;
   ;; setup procedure
   ;;
-
   setup-patches
   setup-turtles
 
-
+  ;; reset the ticks
   reset-ticks
 end
 
@@ -87,7 +91,6 @@ to go
 
   update-global-variables
 
-  tick
 end
 
 ;;
@@ -97,17 +100,14 @@ end
 to setup-patches
 
   ;; generate obstacles for simulating interiors
-  ask patches [
-    set pcolor white
-    set contaminated? false
-  ]
-
   (ifelse configuration = "world-1" [
     setup-wordl-1
   ] configuration = "world-2" [
     setup-wordl-2
   ] configuration = "world-3" [
     setup-wordl-3
+  ] configuration = "world-4" [
+    setup-wordl-4
   ])
 
   ;;
@@ -128,6 +128,12 @@ end
 ;; configuration 1 - two rooms
 ;;
 to setup-wordl-1
+  resize-world 0 20 0 40
+  ask patches [
+    set pcolor white
+    set contaminated? false
+  ]
+
   ask patches [
     if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
       set pcolor obstacle-color
@@ -165,6 +171,12 @@ end
 ;; configuration 2 - three rooms
 ;;
 to setup-wordl-2
+  resize-world 0 20 0 40
+  ask patches [
+    set pcolor white
+    set contaminated? false
+  ]
+
   ask patches [
     if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
       set pcolor obstacle-color
@@ -200,6 +212,12 @@ end
 ;; configuration 3 - four rooms
 ;;
 to setup-wordl-3
+  resize-world 0 20 0 40
+  ask patches [
+    set pcolor white
+    set contaminated? false
+  ]
+
   ask patches [
     if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
       set pcolor obstacle-color
@@ -227,6 +245,47 @@ to setup-wordl-3
     if pcolor = gray + 4 [
       set pcolor white
     ]
+  ]
+end
+
+;;
+;; configuration 4 - three rooms, horizontal
+;;
+to setup-wordl-4
+  resize-world 0 32 0 24
+  ask patches [
+    set pcolor white
+    set contaminated? false
+  ]
+
+  ask patches [
+    if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
+      set pcolor obstacle-color
+    ]
+
+    if pycor = max-pycor / 4 or pycor = 3 * max-pycor / 4 [
+      set pcolor obstacle-color
+    ]
+
+    if pycor = max-pycor / 4 or pycor = 3 * max-pycor / 4 and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
+      set pcolor white
+    ]
+
+    if pcolor != obstacle-color and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
+      set pcolor gray + 4
+    ]
+
+    if pcolor != obstacle-color and pcolor != gray + 4 and pycor != max-pycor / 2 [
+      if random-float 1 < machine-allocation-prob [
+        set pcolor machine-color
+      ]
+    ]
+
+    ;; clear corridor
+    if pcolor = gray + 4 [
+      set pcolor white
+    ]
+
   ]
 end
 
@@ -1042,7 +1101,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.1
+NetLogo 6.4.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
