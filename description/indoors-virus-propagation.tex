@@ -1,4 +1,5 @@
-% v0. 0.10 - 21/03/2024 - added some text about the model and version info
+% v0.10 - 21/03/2024 - added some text about the model and version info
+% v0.11 - 05/09/2024 - small update, added plots, fixed repo link
 \documentclass[10pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -11,17 +12,19 @@
 
 \title{Agent-based indoors virus propagation model\\(short description of the sample results)}
 \author{Jarosław Miszczak}
-\date{21/03/2024 (v. 0.10)}
+\date{05/09/2024 (v. 0.11)}
 
 \begin{document}
 \maketitle
-
+\begin{abstract}
+	This document provides a brief overview of the model for analyzing the impact of mobility on the propagation of infections in the indoor environments. We describe few experiments and present the initial results illustrating the models ability.
+\end{abstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This document provides a brief overview of the model for analysing the impact of mobility on the propagation of infections in the indoor environments. We describe few experiments and present the initial results illustrating the models ability.
+The goal of this document is to provide an overview of the agent-based modeling (ABM) used for simulating the spread of viruses in indoor environments. In our approach individual entities, or \emph{agents}, described by the stage of infection and the mobility, represent people. We also include environmental factors, including the mobility obstacles and workstations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Agent-based model}
@@ -96,7 +99,8 @@ Fig~\ref{fig:sick_increase_small_s_pop100_world-3} & exp7 (population 100, world
 \end{figure}
 
 \begin{thebibliography}{1}
-\bibitem{model-src} \url{https://github.com/jmiszczak/indoors_virus_propagation_private}
+	\bibitem {netlogo} \url{https://ccl.northwestern.edu/netlogo/}
+	\bibitem{model-src} \url{https://github.com/jmiszczak/indoors_virus_propagation_model}
 \end{thebibliography}
 
 \end{document}
