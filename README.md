@@ -1,5 +1,5 @@
 
-[!A sample animation of the simulated behaviour.](world-4-population-50.gif)
+![A sample animation of the simulated behaviour.](world-4-population-50.gif)
 
 
 This repo contains:
