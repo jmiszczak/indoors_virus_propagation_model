@@ -90,7 +90,7 @@ to go
   ]
 
   update-global-variables
-
+  tick
 end
 
 ;;
@@ -359,7 +359,7 @@ end
 
 ;; get infected by contact with contaminated patch
 to get-infected-by-contamination
-  if contaminated? and random-float 1 < patch-infection-weight * infection-probability
+  if contaminated? and random-float 1.0 < patch-infection-weight * infection-probability
   [
     get-sick
   ]
@@ -367,9 +367,9 @@ end
 
 ;; get infected by a direct contact with another agent
 to get-infected-by-contact
-  if (count other turtles-here with [ sick? ])  > 0
+  if (count other turtles-here with [ sick? and sick-time > 8 * 60 * latency-period ]) > 0
   [
-    if random-float 1 < direct-infection-weight * infection-probability
+    if random-float 1.0 < direct-infection-weight * infection-probability
     [
       get-sick
     ]
@@ -460,10 +460,10 @@ to-report increase-sick
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-290
+810
 10
-613
-634
+1313
+394
 -1
 -1
 15.0
@@ -477,9 +477,9 @@ GRAPHICS-WINDOW
 0
 1
 0
-20
+32
 0
-40
+24
 0
 0
 1
@@ -489,7 +489,7 @@ ticks
 BUTTON
 13
 16
-183
+203
 49
 Setup
 setup
@@ -505,14 +505,14 @@ NIL
 
 SLIDER
 15
-165
-185
-198
+155
+200
+186
 population
 population
 0
-100
-100.0
+200
+200.0
 1
 1
 NIL
@@ -521,7 +521,7 @@ HORIZONTAL
 BUTTON
 15
 60
-105
+70
 93
 Go
 go
@@ -536,9 +536,9 @@ NIL
 1
 
 BUTTON
-110
+80
 60
-185
+135
 93
 Run
 repeat 8 * 60 [go]
@@ -554,74 +554,74 @@ NIL
 
 SLIDER
 15
-215
-185
-248
+195
+200
+226
 init-infected-number
 init-infected-number
 0
 100
-1.0
+9.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-20
-510
-275
-543
+520
+35
+775
+68
 mobility-prob
 mobility-prob
 0
 1
-0.01
+0.2
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-20
-560
-275
-593
+520
+85
+775
+118
 patch-contamination-prob
 patch-contamination-prob
 0
 1
-1.0
+0.8
 0.01
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-30
-265
-275
-296
+260
+10
+505
+41
 Weights of the spread channels
 14
 0.0
 0
 
 TEXTBOX
-25
-485
-270
-516
+525
+10
+770
+41
 Parameters of agents and patches
 14
 0.0
 1
 
 SLIDER
-20
-390
-270
-423
+250
+135
+500
+168
 direct-infection-weight
 direct-infection-weight
 0
@@ -633,55 +633,55 @@ NIL
 HORIZONTAL
 
 SLIDER
-20
-340
-267
-373
+250
+85
+497
+118
 patch-infection-weight
 patch-infection-weight
 0
 0.1
-1.0E-4
+0.1
 0.0001
 1
 NIL
 HORIZONTAL
 
 SLIDER
-20
-615
-275
-648
+520
+140
+775
+173
 agent-healing-prob
 agent-healing-prob
 0
 1
-0.0
+0.05
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-20
-660
-275
-693
+520
+185
+775
+218
 patch-heal-prob
 patch-heal-prob
 0
 1
-0.0
+0.05
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-20
-290
-270
-323
+250
+35
+500
+68
 infection-probability
 infection-probability
 0
@@ -695,18 +695,18 @@ HORIZONTAL
 CHOOSER
 15
 105
-153
+200
 150
 configuration
 configuration
-"world-1" "world-2" "world-3"
-2
+"world-1" "world-2" "world-3" "world-4"
+3
 
 PLOT
-640
 15
-1035
-305
+300
+410
+590
 virus spread
 time
 number of infected
@@ -721,10 +721,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot how-many-sick"
 
 MONITOR
-640
-330
-757
-375
+430
+300
+547
+345
 Increase of sick
 increase-sick
 2
@@ -732,28 +732,60 @@ increase-sick
 11
 
 SLIDER
-20
-440
-265
-473
+250
+185
+495
+218
 indirect-infection-weight
 indirect-infection-weight
 0
 0.1
-0.0027
+0.1
 0.0001
 1
 NIL
 HORIZONTAL
 
+SLIDER
+15
+230
+200
+263
+latency-period
+latency-period
+0
+7
+1.0
+1
+1
+NIL
+HORIZONTAL
+
+BUTTON
+140
+60
+200
+93
+5 x Run 
+repeat 5 * 8 * 60 [go]
+NIL
+1
+T
+OBSERVER
+NIL
+5
+NIL
+NIL
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-This model incorporates three mechanisms shaping the dynamics of opinion formation, which mimics the dynamics of the virus spreading in the population. There are three methods of getting infected (or convinced) - direct contact, indirect contact, and contact with ``contaminated'' elements.
+This model was develope to validate the propagation of viral infections in the indoor enviroments shuch as factories, offices or wokkshops. The model is based three mechanisms shaping the dynamics of infection spreading. Hence, each individula (represented by an agent) can be infected via three methods of getting infected (or convinced) - by a direct contact with other agent, by an indirect contact resulting from working in closed environement, and by the contact with ``contaminated'' elements.
 
 ## HOW IT WORKS
 
-The model describes a process of opinion formation. Each agent is either *infected* by some opinion, or he or she is clear (not infected). The interaction is not symmetric, since only infected agents can infect other agents. An agent can infect other agents in two situations. The first situation - **direct contact** - occurs when both occupy the same patch. The second situation - **indirect contact** - occurs when they occupy neighbouring patches.
+The model describes a process of virus spreadin in a limited population, represented by agents moving in the environement designed to resambel typical work places. Each agent is either *infected* or s/he not infected. The interaction is not symmetric, since only infected agents can infect other agents. An agent can infect other agents in two situations. The first situation - **direct contact** - occurs when both occupy the same patch. The second situation - **indirect contact** - occurs when they occupy neighbouring patches. An infected agnet can infect other agents after some predefined *latency period*.
 
 Additionally, an infected agent can contaminate visited patches. This mechanism of opinion formation is introduced in analogy of **contact with contaminated objects**, surface or material, which can be considered as an additional channel for spreading some diseases.
 
