@@ -5,7 +5,7 @@ expName=${expName/./}
 expName=${expName/\//}
 
 # set the file contain the model 
-modelFile=axelrod_model_diversity.nlogo
+modelFile=indoors-virus-propagation.nlogo
 
 # set the file with experiment definitions
 expFile=experiments.xml
