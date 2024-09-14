@@ -462,8 +462,8 @@ end
 GRAPHICS-WINDOW
 810
 10
-1313
-394
+1133
+634
 -1
 -1
 15.0
@@ -477,9 +477,9 @@ GRAPHICS-WINDOW
 0
 1
 0
-32
+20
 0
-24
+40
 0
 0
 1
@@ -512,7 +512,7 @@ population
 population
 0
 200
-200.0
+133.0
 1
 1
 NIL
@@ -525,7 +525,7 @@ BUTTON
 93
 Go
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -561,7 +561,7 @@ init-infected-number
 init-infected-number
 0
 100
-9.0
+2.0
 1
 1
 NIL
@@ -576,7 +576,7 @@ mobility-prob
 mobility-prob
 0
 1
-0.2
+0.24
 0.01
 1
 NIL
@@ -591,7 +591,7 @@ patch-contamination-prob
 patch-contamination-prob
 0
 1
-0.8
+0.85
 0.01
 1
 NIL
@@ -656,7 +656,7 @@ agent-healing-prob
 agent-healing-prob
 0
 1
-0.05
+0.02
 0.01
 1
 NIL
@@ -671,7 +671,7 @@ patch-heal-prob
 patch-heal-prob
 0
 1
-0.05
+0.02
 0.01
 1
 NIL
@@ -700,7 +700,7 @@ CHOOSER
 configuration
 configuration
 "world-1" "world-2" "world-3" "world-4"
-3
+2
 
 PLOT
 15
@@ -755,7 +755,7 @@ latency-period
 latency-period
 0
 7
-1.0
+3.0
 1
 1
 NIL
