@@ -507,7 +507,7 @@ SLIDER
 15
 155
 200
-186
+188
 population
 population
 0
@@ -556,7 +556,7 @@ SLIDER
 15
 195
 200
-226
+228
 init-infected-number
 init-infected-number
 0
