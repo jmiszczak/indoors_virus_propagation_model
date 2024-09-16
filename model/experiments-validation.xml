@@ -2,13 +2,18 @@
 
     <!-- exp6: with patch contamination and parameter values from KD, s=66 -->
     <!-- resulting plot: sick_increase_large_s_pop100.pdf -->
-    <experiment name="exp6" repetitions="100" runMetricsEveryStep="false">
+    <experiment name="exp6-sick_increase_large_s_pop100" repetitions="100" runMetricsEveryStep="false">
       <setup>setup</setup>
       <go>go</go>
       <timeLimit steps="480"/>
+
       <metric>increase-sick</metric>
-      <steppedValueSet variable="mobility-prob" first="0.0" step="0.1" last="1"/>
+
       <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-heal-prob">
         <value value="0"/>
       </enumeratedValueSet>
 
@@ -17,20 +22,23 @@
         <value value="&quot;world-2&quot;"/>
         <value value="&quot;world-3&quot;"/>
       </enumeratedValueSet>
- 
- 
-      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
 
-      <enumeratedValueSet variable="patch-heal-prob">
-        <value value="0"/>
-      </enumeratedValueSet>
-
-      <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
-      
       <enumeratedValueSet variable="population">
         <value value="100"/>
       </enumeratedValueSet>
-      
+
+      <enumeratedValueSet variable="latency-period">
+      <value value="1"/>
+      </enumeratedValueSet>
+
+      <!-- investigated parameters -->
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.05" last="0.5"/>
+
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
+
+      <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
+
+      <!-- channel intensities -->
       <!-- values based on the KD's estimations -->
       <enumeratedValueSet variable="direct-infection-weight">
         <value value="0.01"/>
@@ -51,15 +59,20 @@
     </experiment> 
 
 
-    <!-- exp6a: with patch contamination and parameter values from KD, s=66 -->
+    <!-- exp6a-sick_increase_large_s_pop50: with patch contamination and parameter values from KD, s=66 -->
     <!-- resulting plot: sick_increase_large_s_pop50.pdf -->
     <experiment name="exp6a" repetitions="100" runMetricsEveryStep="false">
       <setup>setup</setup>
       <go>go</go>
+
       <timeLimit steps="480"/>
       <metric>increase-sick</metric>
-      <steppedValueSet variable="mobility-prob" first="0.0" step="0.1" last="1"/>
+
       <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-heal-prob">
         <value value="0"/>
       </enumeratedValueSet>
 
@@ -68,20 +81,23 @@
         <value value="&quot;world-2&quot;"/>
         <value value="&quot;world-3&quot;"/>
       </enumeratedValueSet>
- 
- 
-      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
 
-      <enumeratedValueSet variable="patch-heal-prob">
-        <value value="0"/>
-      </enumeratedValueSet>
-
-      <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
-      
       <enumeratedValueSet variable="population">
         <value value="50"/>
       </enumeratedValueSet>
-      
+
+      <enumeratedValueSet variable="latency-period">
+      <value value="1"/>
+      </enumeratedValueSet>
+
+      <!-- investigated parameters -->
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.05" last="0.5"/>
+
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
+
+      <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
+
+      <!-- channel intensities -->
       <!-- values based on the KD's estimations -->
       <enumeratedValueSet variable="direct-infection-weight">
         <value value="0.01"/>
@@ -135,6 +151,7 @@
         <value value="100"/>
       </enumeratedValueSet>
       
+      <!-- channel intensities -->
       <!-- values based on the KD's estimations -->
       <enumeratedValueSet variable="direct-infection-weight">
         <value value="0.00076"/>
@@ -157,13 +174,17 @@
 
     <!-- exp8: with patch contamination and parameter values from KD, s=5 -->
     <!-- resulting plot: plot_exp8_pop100_world-3.pdf (was: sick_increase_large_s_pop100.pdf) -->
-    <experiment name="exp8" repetitions="100" runMetricsEveryStep="false">
+    <experiment name="exp8_pop100_world-3" repetitions="100" runMetricsEveryStep="false">
       <setup>setup</setup>
       <go>go</go>
       <timeLimit steps="480"/>
       <metric>increase-sick</metric>
-      <steppedValueSet variable="mobility-prob" first="0.0" step="0.1" last="1"/>
+
       <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-heal-prob">
         <value value="0"/>
       </enumeratedValueSet>
 
@@ -172,13 +193,12 @@
         <value value="&quot;world-2&quot;"/>
         <value value="&quot;world-3&quot;"/>
       </enumeratedValueSet>
- 
+
+      <!-- investigated parameters -->
+
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.05" last="0.5"/> 
  
       <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
-
-      <enumeratedValueSet variable="patch-heal-prob">
-        <value value="0"/>
-      </enumeratedValueSet>
 
       <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
       
@@ -187,6 +207,7 @@
         <value value="100"/>
       </enumeratedValueSet>
       
+      <!-- channel intensities -->
       <!-- values based on the KD's estimations -->
       <enumeratedValueSet variable="direct-infection-weight">
         <value value="0.0094"/>
@@ -210,13 +231,17 @@
 
     <!-- exp9: with patch contamination and parameter values from KD, s=5 -->
     <!-- resulting plot: plot_exp9_pop100_world-3.pdf (was: sick_increase_large_s_pop50.pdf) -->
-    <experiment name="exp9" repetitions="100" runMetricsEveryStep="false">
+    <experiment name="exp9_pop100_world-3" repetitions="100" runMetricsEveryStep="false">
       <setup>setup</setup>
       <go>go</go>
       <timeLimit steps="480"/>
       <metric>increase-sick</metric>
-      <steppedValueSet variable="mobility-prob" first="0.0" step="0.1" last="1"/>
+
       <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-heal-prob">
         <value value="0"/>
       </enumeratedValueSet>
 
@@ -225,13 +250,13 @@
         <value value="&quot;world-2&quot;"/>
         <value value="&quot;world-3&quot;"/>
       </enumeratedValueSet>
- 
- 
-      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
 
-      <enumeratedValueSet variable="patch-heal-prob">
-        <value value="0"/>
-      </enumeratedValueSet>
+
+
+      <!-- investigated parameters -->
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.05" last="0.5"/>
+
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.05" last="0.5"/>
 
       <steppedValueSet variable="init-infected-number" first="0" step="1" last="10"/>
       
@@ -240,6 +265,7 @@
         <value value="100"/>
       </enumeratedValueSet>
       
+      <!-- channel intensities -->
       <!-- values based on the KD's estimations -->
       <enumeratedValueSet variable="direct-infection-weight">
         <value value="0.00071"/>
