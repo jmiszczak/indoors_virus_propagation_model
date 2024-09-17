@@ -21,7 +21,7 @@ date +"%d/%m - %H:%M"
 # run NetLogo in the headless mode
 # use 16 threads by default
 # save results using table format
-netlogo-headless.sh --threads 20 \
+netlogo-headless.sh --threads 16 \
   --model $modelFile \
   --setup-file $expFile \
   --table data/$expName.csv \
