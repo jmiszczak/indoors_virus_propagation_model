@@ -2,11 +2,11 @@
 ![A sample animation of the simulated behaviour.](world-4-population-50.gif)
 
 
-This repo contains model, definitions of experiemnts, and some results obtained usinn a model of infection spreading.
+This repo contains a model, definitions of experiments, and some results obtained using a model of infection spreading.
 
 # Introduction
 
-This model was developed to validate the propagation of viral infections in the indoor environments such as factories, offices or workshops. The model is based on three mechanisms shaping the dynamics of infection spreading. Hence, each individual (represented by an agent) can be infected via three methods of getting infected (or convinced) - by a direct contact with another agent, indirect contact resulting from working in closed environment, and contact with ``contaminated'' elements.
+This model was developed to validate the propagation of viral infections in the indoor environments such as factories, offices or workshops. The model is based on three mechanisms shaping the dynamics of infection spreading. Hence, each individual (represented by an agent) can be infected via three methods of getting infected (or convinced) - by a direct contact with another agent, indirect contact resulting from working in a closed environment, and contact with ``contaminated'' elements.
 
 ## Model description
 
@@ -16,7 +16,7 @@ Additionally, an infected agent can contaminate visited patches. This channel of
 
 # How to reproduce the results?
 
-*NOte*: The instructions given below were tested using Ubuntu 22.04 and should be relevant for any GNU/Linux or UNIX based system such as FreeBSD and macOS.
+*Note*: The instructions given below were tested using Ubuntu 22.04 and should be relevant for any GNU/Linux or UNIX-based systems, such as FreeBSD and macOS.
 
 ## Requirements
 
@@ -26,23 +26,23 @@ You should include
 ```
 export PATH=/home/jam/Local/NetLogo/current:/home/jam/Local/NetLogo/current/bin:$PATH
 ```
-in you enviroement configuration file to ensure that ``netlogo-headless.sh`` is visible in your ``$PATH``
+in your environment configuration file to ensure that ``netlogo-headless.sh`` is visible in your ``$PATH``
 
 ## Running the simulations
 
-The main model is located in ``model`` subdirectory in ``indoors-virus-propagation.nlogo`` file. This file should be edited uing NetLog editor.
+The main model is located in the ``model`` subdirectory in the ``indoors-virus-propagation.nlogo`` file. This file should be edited using the NetLogo editor.
 
-Files ``experiments-preliminary.xml`` and ``experiments-validation.xml`` contain definitions of experiements. For convenience, symbolic link ``experiments.xml`` points to ``experiments-validation.xml``.
+Files ``experiments-preliminary.xml`` and ``experiments-validation.xml`` contain definitions of experiments. For convenience, the symbolic link ``experiments.xml`` points to ``experiments-validation.xml``.
 
-By running ``./make_links.sh`` in ``model`` directory you can create symbolic links for running all experiements defined in ``experiements.xml`` file. Each created link will point to ``run.sh` script, which controls the process of runnig simulations.
+By running ``./make_links.sh`` in ``model`` directory you can create symbolic links for running all experiments defined in ``experiements.xml`` file. Each created link will point to ``run.sh` script, which controls the process of running simulations.
 
-By default, ``run.sh`` will use 16 thhreads to harness the pararell capabilities of NetLogo. It will also creat a separete subdirectory ``data`` in the ``model`` directory.
+By default, ``run.sh`` will use 16 threads to harness the parallel capabilities of NetLogo. It will also create a separate subdirectory ``data`` in the ``model`` directory.
 
-Simulation results are stored in ``CSV`` files in ``data`` subdirectory. Those files are named according to the name of the experiement.
+Simulation results are stored in ``CSV`` files in ``data`` subdirectory. Those files are named according to the name of the experiment.
 
-## Data viluatization
+## Data visualization
 
-The obtained data can be plotted using Python scripts located in ``model`` directory. The scripts required Python 3, as well as Matplotlib, Pandas and Numpy packages.
+The obtained data can be plotted using Python scripts located in the ``model`` directory. The scripts required Python 4, as well as the Matplotlib, Pandas and Numpy packages.
 
 # References
 
