@@ -826,7 +826,7 @@ One of the possible extension of the model can be made by introducing two or mor
 
 ## NETLOGO FEATURES
 
-Each agent can in one of two states - sick, represented by color *red* and healthy, represented by the color *white*. Similarly, each patch can be contaminated (pink) or clean (white). Black patches represent obstacles and are fixed during the setup phase.
+Each agent can be in one of two states - sick, represented by the color *red, or healthy, represented by the color *white*. Similarly, each patch can be contaminated (pink) or clean (white). Black patches represent obstacles and are fixed during the setup phase.
 
 ## RELATED MODELS
 
