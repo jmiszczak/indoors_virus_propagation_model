@@ -569,9 +569,9 @@ HORIZONTAL
 
 SLIDER
 520
-35
+50
 775
-68
+83
 mobility-prob
 mobility-prob
 0
@@ -584,9 +584,9 @@ HORIZONTAL
 
 SLIDER
 520
-85
+100
 775
-118
+133
 patch-contamination-prob
 patch-contamination-prob
 0
@@ -618,10 +618,10 @@ Parameters of agents and patches
 1
 
 SLIDER
-250
-135
-500
-168
+245
+100
+495
+133
 direct-infection-weight
 direct-infection-weight
 0
@@ -633,10 +633,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-250
-85
-497
-118
+245
+50
+492
+83
 patch-infection-weight
 patch-infection-weight
 0
@@ -649,9 +649,9 @@ HORIZONTAL
 
 SLIDER
 520
-140
+155
 775
-173
+188
 agent-healing-prob
 agent-healing-prob
 0
@@ -664,9 +664,9 @@ HORIZONTAL
 
 SLIDER
 520
-185
+200
 775
-218
+233
 patch-heal-prob
 patch-heal-prob
 0
@@ -678,10 +678,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-250
-35
-500
-68
+245
+195
+495
+228
 infection-probability
 infection-probability
 0
@@ -732,10 +732,10 @@ increase-sick
 11
 
 SLIDER
-250
-185
-495
-218
+245
+150
+490
+183
 indirect-infection-weight
 indirect-infection-weight
 0
@@ -781,36 +781,44 @@ NIL
 @#$#@#$#@
 ## WHAT IS IT?
 
-This model was develope to validate the propagation of viral infections in the indoor enviroments shuch as factories, offices or wokkshops. The model is based three mechanisms shaping the dynamics of infection spreading. Hence, each individula (represented by an agent) can be infected via three methods of getting infected (or convinced) - by a direct contact with other agent, by an indirect contact resulting from working in closed environement, and by the contact with ``contaminated'' elements.
+This model was developed to validate the propagation of viral infections in the indoor environments such as factories, offices or workshops. The model is based on three mechanisms shaping the dynamics of infection spreading. Hence, each individual (represented by an agent) can be infected via three methods of getting infected (or convinced) - by a direct contact with another agent, indirect contact resulting from working in closed environment, and contact with ``contaminated'' elements.
 
 ## HOW IT WORKS
 
-The model describes a process of virus spreadin in a limited population, represented by agents moving in the environement designed to resambel typical work places. Each agent is either *infected* or s/he not infected. The interaction is not symmetric, since only infected agents can infect other agents. An agent can infect other agents in two situations. The first situation - **direct contact** - occurs when both occupy the same patch. The second situation - **indirect contact** - occurs when they occupy neighbouring patches. An infected agnet can infect other agents after some predefined *latency period*.
+The model describes a process of virus spreading in a limited population, acting in a confined environment, represented by agents moving in the environment designed to resemble typical work places. Each agent is either *infected* or not infected. The interaction is not symmetric, since only infected agents can infect other agents. An agent can infect other agents in two situations. The first situation - **direct contact** - occurs when both occupy the same patch. The second situation - **indirect contact** - occurs when they occupy neighboring patches. An infected agent can infect other agents after a predefined *latency period*.
 
-Additionally, an infected agent can contaminate visited patches. This mechanism of opinion formation is introduced in analogy of **contact with contaminated objects**, surface or material, which can be considered as an additional channel for spreading some diseases.
+Additionally, an infected agent can contaminate visited patches. This channel of infection spread is introduced to model the contact with contaminated objects, surfaces, or materials, which can be considered an additional channel for spreading some diseases.
 
 ## HOW TO USE IT
 
 The user interface is divided into three sections. 
 
-In the setup section one can fix the population (slider *population*), percentage of patches which are considered as unavailable for agents (slider *init-obstacles-ratio*), as well as initial percentage of contaminated patches (slider *init-contamination-ratio*) and the initial number of infected agents (slider *init-infected-ratio*).
+In the section *Setup* one can fix the population (slider *population*), the percentage of patches which are considered as unavailable for agents (slider *init-obstacles-ratio*), as well as the initial percentage of contaminated patches (slider *init-contamination-ratio*). In this section you can also fix the initial number of infected agents and (slider *init-infected-ratio*). Additionally, the mode can be altered by modifying the latency period (slider *latency-period*), which defines the number of days before the agent will be able to infect other agents. Note, that each day is equal to 8*60 time steps.
 
-The second section - *Weights of the spread channels* - includes parameter of the opinion (or virus) spread. Slider *infection-probability* can be used to control the overall probability of getting infected. Additionally, sliders *direct-infection-weight* and *patch-infection-weight* can be used to change the probabilities of getting infected during the direct contact and via contact with a contaminated patch. Monitor *indirect-infection-weight* displays the current value of probability assigned to the second channel - indirect contact - and it is calculated as the complement of the other two channels.
+The second section - *Weights of the spread channels* - includes parameters of the channels used to spread the infection. There are three main parameters here. Sliders  *patch-infection-weight*, *direct-infection-weight* and *indirect-infection-weight can be used to change the probabilities of getting infected via contact with a contaminated patch, during the direct contact, and via indirect contact.
 
-The third section - *Parameters of agents and patches* - included parameters controling healing and mobility. In particular,
+Additionally, slider *infection-probability* can be used to control the overall probability of getting infected, which can be used for normalization.
+
+The third section - *Parameters of agents and patches* - includes parameters controling healing and mobility. In particular,
 
   * slider *mobility-prob* controls the probability of agents ot make a move;
   * slider *patch-contamination-prob* defines the probability of a patch to be contaminated by a visiting, sick agent;
   * slider *agent-healing-prob* controls the probability of a sick agent to get healty at each tick;
   * slilder *patch-heal-prob* controls the probability od a contaminated patch to get clean;
 
+Note that each prbability is defined as a probablity of acting durin one time step.
+
 ## THINGS TO NOTICE
 
-The most interesting observation of the interplay between the weights assigned to particular channels. Weights assigned to all channels should sum up to one. However, in many situations, to low probability of getting infected via contact with contaminated patches (*patch-infection-weight*). In other words, setting too large value of *direct-infection-weight* is more likely to result in getting all agents healthy. On the other hand, by increasing the weight of the *patch-infection-weight* (or *indirect-infection-weight*), it is relatively easy to obtain a stable number of infected agents, independently of the other parameters, including mobility.
+One should be aware that the presented model was tuned for a specific purpose of validating some observation from othe simulation models. Hence, each time step is use to represent a one minut period.
+
+The most interesting observation is the interplay between the weights assigned to particular channels. Weights assigned to all channels should sum up to one. However, in many situations, there is a low probability of getting infected via contact with contaminated patches (*patch-infection-weight*). In other words, setting a too large value of *direct-infection-weight* is more likely to result in getting all agents healthy. On the other hand, by increasing the weight of the *patch-infection-weight* (or *indirect-infection-weight*), it is relatively easy to obtain a stable number of infected agents, independent of the other parameters, including mobility.
+
+Using the presented model, it is easy to confirm that a large population confined to a finite environment is very susceptible to infection spreading. This can be observed by increasing the value of the *population*.
 
 ## THINGS TO TRY
 
-One of the features of the model is the ability to control the mobility. This cab be dome by significantly limit the mobility with the hight perncetage of obstacles. On the other hand. one can control the probility of moving (slider *mobility*), and it can be changed during the run.
+One of the features of the model is its ability to control the mobility. This can be done by significantly limiting mobility with a high percentage of obstacles. On the other hand, one can control the probability of moving (slider *mobility*), and it can be changed during the run.
 
 ## EXTENDING THE MODEL
 
@@ -818,7 +826,7 @@ One of the possible extension of the model can be made by introducing two or mor
 
 ## NETLOGO FEATURES
 
-The model does not include. Each agent can in one of two states - sick, represented by colour *red* and healthy, represented by colour *white*. Similarly, each patch can be contaminated (pink) or clean (white). Black patches represent obstacles and are fixed during the setup phase.
+Each agent can in one of two states - sick, represented by color *red* and healthy, represented by the color *white*. Similarly, each patch can be contaminated (pink) or clean (white). Black patches represent obstacles and are fixed during the setup phase.
 
 ## RELATED MODELS
 
@@ -826,7 +834,7 @@ There are several models in the NetLogo Models Library related to virus spread. 
 
 ## CREDITS AND REFERENCES
 
-The model has been developed by Jaroslaw Miszczak and Krzysztof Domino, Institute of Theoretical and Applied Informatics, Polish Academy of Sciences.
+The model has been developed by Jaroslaw Miszczak, Krzysztof Domino and Arkadiusz Sochan, Institute of Theoretical and Applied Informatics, Polish Academy of Sciences.
 @#$#@#$#@
 default
 true
