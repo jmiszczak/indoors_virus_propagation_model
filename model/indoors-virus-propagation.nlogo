@@ -108,6 +108,8 @@ to setup-patches
     setup-wordl-3
   ] configuration = "world-4" [
     setup-wordl-4
+  ] configuration = "world-5" [
+    setup-wordl-5
   ])
 
   ;;
@@ -290,6 +292,47 @@ to setup-wordl-4
 end
 
 ;;
+;; configuration 5 - three rooms, horizontal, small
+;;
+to setup-wordl-5
+  resize-world 0 24 0 16
+  ask patches [
+    set pcolor white
+    set contaminated? false
+  ]
+  ask patches [
+    if pxcor = 0 or pycor = 0 or pxcor = max-pxcor or pycor = max-pycor [
+      set pcolor obstacle-color
+    ]
+
+    if pycor = max-pycor / 4 or pycor = 3 * max-pycor / 4 [
+      set pcolor obstacle-color
+    ]
+
+    if pycor = max-pycor / 4 or pycor = 3 * max-pycor / 4 and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
+      set pcolor white
+    ]
+
+    if pcolor != obstacle-color and ( pxcor = max-pxcor / 2 or pxcor = max-pxcor / 2  + 1 or pxcor = max-pxcor / 2 - 1 )[
+      set pcolor gray + 4
+    ]
+
+    if pcolor != obstacle-color and pcolor != gray + 4 and pycor != max-pycor / 2 [
+      if random-float 1 < machine-allocation-prob [
+        set pcolor machine-color
+      ]
+    ]
+
+    ;; clear corridor
+    if pcolor = gray + 4 [
+      set pcolor white
+    ]
+
+  ]
+
+end
+
+;;
 ;; setup agents
 ;;
 
@@ -462,8 +505,8 @@ end
 GRAPHICS-WINDOW
 810
 10
-1133
-634
+1193
+274
 -1
 -1
 15.0
@@ -477,9 +520,9 @@ GRAPHICS-WINDOW
 0
 1
 0
-20
+24
 0
-40
+16
 0
 0
 1
@@ -512,7 +555,7 @@ population
 population
 0
 200
-133.0
+50.0
 1
 1
 NIL
@@ -699,8 +742,8 @@ CHOOSER
 150
 configuration
 configuration
-"world-1" "world-2" "world-3" "world-4"
-2
+"world-1" "world-2" "world-3" "world-4" "world-5"
+4
 
 PLOT
 15
