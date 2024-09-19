@@ -286,4 +286,125 @@
       </enumeratedValueSet>
     </experiment> 
 
+    <!-- experiments used in the paper -->
+
+
+    <!-- exp6b: with patch contamination and parameter values from KD, s=66 -->
+    <!-- resulting plot: sick_increase_large_s_varpop.pdf -->
+    <experiment name="exp6b-sick_increase_large_s_varpop" repetitions="100" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <timeLimit steps="480"/>
+
+      <metric>increase-sick</metric>
+
+      <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-heal-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="configuration">
+        <value value="&quot;world-5&quot;"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="population">
+        <value value="30"/>
+        <value value="50"/>
+        <value value="70"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="latency-period">
+      <value value="1"/>
+      </enumeratedValueSet>
+
+      <!-- investigated parameters -->
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.1" last="0.5"/>
+
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.1" last="0.5"/>
+
+      <steppedValueSet variable="init-infected-number" first="1" step="2" last="10"/>
+
+      <!-- channel intensities -->
+      <!-- values based on the KD's estimations -->
+      <enumeratedValueSet variable="direct-infection-weight">
+        <value value="0.0049"/>
+      </enumeratedValueSet>
+      
+      <enumeratedValueSet variable="indirect-infection-weight">
+        <value value="0.0013"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-infection-weight">
+        <value value="0.0001"/>
+      </enumeratedValueSet>
+
+      <!-- scaling parameter - not used -->
+      <enumeratedValueSet variable="infection-probability">
+        <value value="1"/>
+      </enumeratedValueSet>
+    </experiment> 
+
+    <!-- exp6c: with patch contamination and parameter values from KD, s=7.5 -->
+    <!-- resulting plot: sick_increase_small_s_varpop.pdf -->
+    <experiment name="exp6c-sick_increase_small_s_varpop" repetitions="100" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <timeLimit steps="480"/>
+
+      <metric>increase-sick</metric>
+
+      <enumeratedValueSet variable="agent-healing-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-heal-prob">
+        <value value="0"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="configuration">
+        <value value="&quot;world-5&quot;"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="population">
+        <value value="30"/>
+        <value value="50"/>
+        <value value="70"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="latency-period">
+      <value value="1"/>
+      </enumeratedValueSet>
+
+      <!-- investigated parameters -->
+      <steppedValueSet variable="mobility-prob" first="0.0" step="0.1" last="0.5"/>
+
+      <steppedValueSet variable="patch-contamination-prob" first="0" step="0.1" last="0.5"/>
+
+      <steppedValueSet variable="init-infected-number" first="1" step="2" last="10"/>
+
+      <!-- channel intensities -->
+      <!-- values based on the KD's estimations -->
+      <enumeratedValueSet variable="direct-infection-weight">
+        <value value="0.0054"/>
+      </enumeratedValueSet>
+      
+      <enumeratedValueSet variable="indirect-infection-weight">
+        <value value="0.00014"/>
+      </enumeratedValueSet>
+
+      <enumeratedValueSet variable="patch-infection-weight">
+        <value value="0.0001"/>
+      </enumeratedValueSet>
+
+      <!-- scaling parameter - not used -->
+      <enumeratedValueSet variable="infection-probability">
+        <value value="1"/>
+      </enumeratedValueSet>
+    </experiment> 
+
+
+
 </experiments>
