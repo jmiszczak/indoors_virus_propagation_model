@@ -26,7 +26,7 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = 'exp9'
+exp_desc = 'exp9_pop100_world-3'
 
 # choose the configuration of the interior
 confs = ['world-1', 'world-2', 'world-3']
