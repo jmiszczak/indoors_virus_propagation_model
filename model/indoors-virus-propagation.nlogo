@@ -332,6 +332,7 @@ to setup-wordl-5
 
 end
 
+
 ;;
 ;; setup agents
 ;;
@@ -604,7 +605,7 @@ init-infected-number
 init-infected-number
 0
 100
-2.0
+5.0
 1
 1
 NIL
@@ -668,7 +669,7 @@ SLIDER
 direct-infection-weight
 direct-infection-weight
 0
-0.1
+0.3
 0.1
 0.0001
 1
@@ -683,7 +684,7 @@ SLIDER
 patch-infection-weight
 patch-infection-weight
 0
-0.1
+0.3
 0.1
 0.0001
 1
@@ -782,7 +783,7 @@ SLIDER
 indirect-infection-weight
 indirect-infection-weight
 0
-0.1
+0.3
 0.1
 0.0001
 1
@@ -798,7 +799,7 @@ latency-period
 latency-period
 0
 7
-3.0
+1.0
 1
 1
 NIL
