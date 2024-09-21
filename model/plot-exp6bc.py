@@ -26,8 +26,8 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp1_desc = 'exp6c-sick_increase_small_s_varpop'
-#exp1_desc = 'exp6b-sick_increase_large_s_varpop'
+#exp1_desc = 'exp6c-sick_increase_small_s_varpop'
+exp1_desc = 'exp6b-sick_increase_large_s_varpop'
 
 
 # choose the configuration of the interior
@@ -70,7 +70,7 @@ c = [
 # 5th variable is visualized
 v = ['mobility-prob', 'population', 'patch-contamination-prob', 'init-infected-number', 'increase-sick']
 # vl = ['pc', r'$p_\lambda$', 'mobility']
-vl = ['$\mu$', 'n', 'patch contamination probability', 'initially infected agents', 'increase-sick']
+vl = ['$\mu$', '$n$', 'patch contamination probability', 'initially infected agents', 'increase-sick']
 
 # selection for plotting
 
@@ -113,15 +113,15 @@ for i,v0 in enumerate(var0s):
         axs = fig.add_subplot(3,3,1+i+3*j)
         plot_data = df[(df[v[0]] == v0) & (df[v[1]] == v1)][[v[2], v[3], v[4]]].to_numpy()
     
-        # axs.contour(
-        #     plot_data.T[0].reshape(len(var2s), len(var3s)), 
-        #     plot_data.T[1].reshape(len(var2s), len(var3s)), 
-        #     plot_data.T[2].reshape(len(var2s), len(var3s)),
-        #     levels = levels,
-        #     antialiased = True,
-        #     linewidths = 0.5,
-        #     colors = 'k',linestyles='dotted'
-        # )
+        axs.contour(
+            plot_data.T[0].reshape(len(var2s), len(var3s)), 
+            plot_data.T[1].reshape(len(var2s), len(var3s)), 
+            plot_data.T[2].reshape(len(var2s), len(var3s)),
+            levels = levels,
+            antialiased = True,
+            linewidths = 0.5,
+            colors = 'k',linestyles='dotted'
+        )
         
         im=axs.contourf(
             plot_data.T[0].reshape(len(var2s), len(var3s)), 
@@ -133,7 +133,8 @@ for i,v0 in enumerate(var0s):
         )
         
         axs.set_title(chr(97+i) +') '+vl[0]+'='+str(v0)+", "+ vl[1]+'='+str(v1))
-        axs.set_xticks(var2s[::2])
+        axs.set_xticks(var2s[::1])
+        axs.set_yticks(var3s[::1])
         # axs.set_xlim(0,1)
         
         axs.grid(True,linestyle=':', linewidth=0.5, c='k')
