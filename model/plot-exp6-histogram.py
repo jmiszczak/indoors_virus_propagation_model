@@ -26,41 +26,43 @@ def mav(x, w=100):
 # file with data from the experiment
 # Note: header=6 is for NetLogo data
 
-exp_desc = []
-exp_desc.append('exp6')
-exp_desc.append('exp7')
+exp_desc = 'exp7a-sick_increase_large_s_pop100'
+
 
 # choose the configuration of the interior
-confs = ['world-1', 'world-2', 'world-3']
+confs = ['world-1', 'world-2', 'world-3', 'world-4', 'world-5']
 
 popul = 100
-conf = 0
+conf = 4
 
-exp_desc_extr = f'pop{popul}_{confs[conf]}_' + "_".join(exp_desc) +'_hist'
+
+exp_desc_extr = exp_desc + f'_{confs[conf]}' +'_hist'
 
 data = []
 
-for i,e in enumerate(exp_desc):
-  data.append( pd.read_csv('data/' + e + '.csv', header=6))
-  data[i] = data[i][data[i]['configuration'] == confs[conf]]
-  data[i] = data[i][data[i]['population'] == popul]
+
+data = pd.read_csv('data/' + exp_desc + '.csv', header=6)
+data = data[data['configuration'] == confs[conf]]
+data = data[data['population'] == popul]
 
 #%% column names
 
 c = [
-  "[run number]",
-  "mobility-prob",
-  "agent-healing-prob",
-  "configuration",
-  "direct-infection-weight",
-  "patch-contamination-prob",
-  "patch-heal-prob",
-  "init-infected-number",
-  "population",
-  "patch-infection-weight",
-  "infection-probability",
-  "[step]",
-  "increase-sick"
+     "[run number]",
+     "agent-healing-prob",
+     "patch-heal-prob",
+     "configuration",
+     "population",
+     "latency-period",
+     "mobility-prob",
+     "patch-contamination-prob",
+     "init-infected-number",
+     "direct-infection-weight",
+     "indirect-infection-weight",
+     "patch-infection-weight",
+     "infection-probability",
+     "[step]",
+     "increase-sick"
   ]
 
 # variables
@@ -84,40 +86,45 @@ var0s = [0.1,0.5,1]
 var1s =  [_ for _ in [1,5,10]]
 var2s = [0.5] # only one case
 
+# patch-contamination-prob
+pcps = [0.1, 0.5]
+
 #%% 
 # calculate mean for the presented variable
 df = []
 
-for i,e in enumerate(exp_desc):
-  df.append(pd.DataFrame(columns=v))
 
-  for v0 in var0s:
-    for v1 in var1s:
-      for v2 in var2s:
-        df[i].loc[len(df[i].index)] = [
-          v0,
-          v1,
-          v2,
-          data[i][ (data[i][v[0]] == v0) & (data[i][v[1]] == v1) & (data[i][v[2]] == v2) ] ['increase-sick']
-        ]
+df = pd.DataFrame(columns=v)
+
+for v0 in var0s:
+  for v1 in var1s:
+    for v2 in var2s:
+      df.loc[len(df.index)] = [
+        v0,
+        v1,
+        v2,
+        data[ (data[v[0]] == v0) & (data[v[1]] == v1) & (data[v[2]] == v2) ] ['increase-sick']
+      ]
 
 #%%
 
 fig = mpl.figure.Figure(figsize=(6,6))
 # levels = np.linspace(0,11)
 # levels = range(1,14,2)
-colors = ["red","navy"]
-line_styles = ['solid','dashed']
+colors = ["red","navy", "green"]
+line_styles = ['solid','dashed','-.']
+
 plot_data = []
+
 for i,v0 in enumerate(var0s):
   for j,v1 in enumerate(var1s):
     # print(i,j)
     
     axs = fig.add_subplot(3,3,i+1+3*j)
-    for k,e in enumerate(exp_desc):
-      plot_data.append(df[k][df[k][v[0]] == v0])
-    
-      plot_data[k] = data[k][ (data[k]['mobility-prob'] == v0) & (data[k]['init-infected-number'] == v1) & (data[k]['patch-contamination-prob'] == 0.5) ]['increase-sick'].to_numpy()
+    for k,pcp in enumerate(pcps):
+      plot_data.append(df[df[v[0]] == v0])
+        
+      plot_data[k] = data[ (data['mobility-prob'] == v0) & (data['init-infected-number'] == v1) & (data['patch-contamination-prob'] == pcp) ]['increase-sick'].to_numpy()
       axs.hist(plot_data[k], bins=8, density=False, histtype = 'step', color=colors[k], linestyle=line_styles[k])
     
     axs.set_xlim(0,30)
