@@ -526,7 +526,7 @@
 
     <!-- exp6e: with patch contamination and parameter values from KD, s=66, extra dense mobility -->
   <!-- resulting plot: sick_increase_large_s_varpop.pdf -->
-  <experiment name="exp6e-sick_increase_large_s_varpop_dense2" repetitions="100" runMetricsEveryStep="false">
+  <experiment name="exp6e-sick_increase_large_s_varpop_dense2" repetitions="500" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="480"/>
